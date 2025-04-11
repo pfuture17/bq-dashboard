@@ -1,0 +1,96 @@
+/* CrudView.module.css */
+.crudView {
+  padding: 20px;
+  background-color: #f7f9fc;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.backButton {
+  background-color: #fff;
+  color: #0052d4;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+  margin-top: 15px;
+}
+
+.backButton:hover {
+  background-color: #e0e7f5;
+}
+
+.addRowContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.addRowContainer h3 {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.inputField {
+  padding: 10px;
+  font-size: 1rem;
+  width: 250px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.inputField:focus {
+  border-color: #0052d4;
+}
+
+.addButton {
+  padding: 10px 20px;
+  background-color: #0052d4;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.addButton:hover {
+  background-color: #003fa3;
+}
+
+.searchBar {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.searchInput {
+  width: 300px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.searchInput:focus {
+  border-color: #0052d4;
+}
+
+.noData {
+  text-align: center;
+  font-size: 1.1rem;
+  margin-top: 20px;
+}

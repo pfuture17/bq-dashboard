@@ -1,101 +1,75 @@
+// src/components/TableComponent.js
 import React, { useState } from 'react';
-import './TableComponent.css';
+import styles from './TableComponent.module.css';
 
-const TableComponent = ({ data, onDelete, onSave }) => {
-  // We'll store the original bundle name alongside our editing info.
+const TableComponent = ({ data, onDelete, onSave, idField = 'bundle_name' }) => {
   const [editingRow, setEditingRow] = useState(null);
   const [editedData, setEditedData] = useState({});
-  const [originalBundle, setOriginalBundle] = useState(null);
+  const [originalId, setOriginalId] = useState(null);
 
   if (!data || data.length === 0) {
     return <div className="empty-table">No data available</div>;
   }
 
-  // Use the real column names (excluding the artificial id property)
   const columns = Object.keys(data[0]).filter(col => col !== 'id');
 
   const handleEdit = (row) => {
-    // Use the real identifier: bundle_name
-    setEditingRow(row.bundle_name);
+    setEditingRow(row[idField]);
     setEditedData({ ...row });
-    setOriginalBundle(row.bundle_name); // Store original value for later use
+    setOriginalId(row[idField]);
   };
 
   const handleInputChange = (column, value) => {
-    setEditedData({
-      ...editedData,
-      [column]: value,
-    });
+    setEditedData({ ...editedData, [column]: value });
   };
 
   const handleSave = async () => {
-    // Pass the original bundle name as the first parameter
-    await onSave(originalBundle, editedData);
+    await onSave(originalId, editedData);
     setEditingRow(null);
-    setOriginalBundle(null);
+    setOriginalId(null);
   };
 
   const handleCancel = () => {
     setEditingRow(null);
     setEditedData({});
-    setOriginalBundle(null);
+    setOriginalId(null);
   };
 
   return (
-    <div className="table-container">
-      <table className="data-table">
+    <div className={styles.tableContainer}>
+      <table className={styles.dataTable}>
         <thead>
           <tr>
-            {columns.map(column => (
-              <th key={column}>{column}</th>
-            ))}
+            {columns.map(col => <th key={col}>{col}</th>)}
             <th>Actions</th>
           </tr>
         </thead>
         <tbody>
           {data.map(row => (
-            // Use bundle_name as the unique key
-            <tr key={row.bundle_name}>
-              {columns.map(column => (
-                <td key={`${row.bundle_name}-${column}`}>
-                  {editingRow === row.bundle_name ? (
+            <tr key={row[idField]}>
+              {columns.map(col => (
+                <td key={`${row[idField]}-${col}`}>
+                  {editingRow === row[idField] ? (
                     <input
                       type="text"
-                      value={editedData[column] || ''}
-                      onChange={(e) =>
-                        handleInputChange(column, e.target.value)
-                      }
+                      value={editedData[col] || ''}
+                      onChange={(e) => handleInputChange(col, e.target.value)}
                     />
                   ) : (
-                    row[column]
+                    row[col]
                   )}
                 </td>
               ))}
-              <td className="action-buttons">
-                {editingRow === row.bundle_name ? (
+              <td className={styles.actionButtons}>
+                {editingRow === row[idField] ? (
                   <>
-                    <button className="save-btn" onClick={handleSave}>
-                      Save
-                    </button>
-                    <button className="cancel-btn" onClick={handleCancel}>
-                      Cancel
-                    </button>
+                    <button className={styles.saveBtn} onClick={handleSave}>Save</button>
+                    <button className={styles.cancelBtn} onClick={handleCancel}>Cancel</button>
                   </>
                 ) : (
                   <>
-                    <button
-                      className="edit-btn"
-                      onClick={() => handleEdit(row)}
-                    >
-                      Edit
-                    </button>
-                    <button
-                      className="delete-btn"
-                      // Use the real bundle_name for deletion
-                      onClick={() => onDelete(row.bundle_name)}
-                    >
-                      Delete
-                    </button>
+                    <button className={styles.editBtn} onClick={() => handleEdit(row)}>Edit</button>
+                    <button className={styles.deleteBtn} onClick={() => onDelete(row[idField])}>Delete</button>
                   </>
                 )}
               </td>
