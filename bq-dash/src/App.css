@@ -1,0 +1,42 @@
+/* App.css */
+
+/* Styles for Add New Row Section */
+.add-row-container {
+  margin: 20px 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.add-row-container input {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.add-row-container button {
+  padding: 8px 16px;
+  border: none;
+  background-color: #4CAF50;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.add-row-container button:hover {
+  background-color: #45a049;
+}
+
+/* Styles for Search Bar */
+.search-bar-container {
+  margin: 20px 0;
+  display: flex;
+  justify-content: center;
+}
+
+.search-bar-container input {
+  width: 300px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
